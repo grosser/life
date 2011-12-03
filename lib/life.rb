@@ -39,9 +39,9 @@ class Life
     ].select{|x|x=='#'}.size
 
     if @board[row][col] == '#'
-      [3].include? neighbors_count
-    else
       [2,3].include? neighbors_count
+    else
+      [3].include? neighbors_count
     end
   end
 end
