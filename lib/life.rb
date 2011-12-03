@@ -1,8 +1,6 @@
 class Life
-  BOARD_DIMENSION = 15
-
   def initialize(life)
-    @board = new_board
+    @board = new_board(5)
     life.each do |row, col|
       @board[row][col] = '#'
     end
@@ -12,15 +10,15 @@ class Life
     @board.map{|line| line.join('') }.join("\n")
   end
 
-  def new_board
-    Array.new(BOARD_DIMENSION).map{ Array.new(BOARD_DIMENSION).fill(' ') }
+  def new_board(dimension)
+    Array.new(dimension).map{ Array.new(dimension).fill(' ') }
   end
 
   def iterate
-    _board = new_board
-    @board.each_with_index do |row,i|
+    _board = new_board(@board.size + 2)
+    _board.each_with_index do |row,i|
       row.each_with_index do |col,j|
-        _board[i][j] = will_be_live(i,j) ? '#' : ' '
+        _board[i][j] = will_be_live(i-1,j-1) ? '#' : ' '
       end
     end
     @board = _board
@@ -38,7 +36,7 @@ class Life
       (@board[row+1][col+1] rescue nil),
     ].select{|x|x=='#'}.size
 
-    if @board[row][col] == '#'
+    if (@board[row][col] rescue nil) == '#'
       [2,3].include? neighbors_count
     else
       [3].include? neighbors_count
