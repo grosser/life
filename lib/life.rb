@@ -21,6 +21,15 @@ class Life
         _board[i][j] = will_be_live(i-1,j-1) ? '#' : ' '
       end
     end
+
+    if _board.first.uniq == [' '] and _board.last.uniq == [' ']
+      if _board.map{|row| [row.first, row.last] }.flatten.uniq == [' ']
+        _board.shift
+        _board.pop
+        _board = _board.map{|row| row[1..-2] }
+      end
+    end
+
     @board = _board
   end
 
