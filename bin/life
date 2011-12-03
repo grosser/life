@@ -1,0 +1,49 @@
+#!/usr/bin/env ruby
+require 'curses'
+require File.expand_path('../../lib/life', __FILE__)
+
+STATUS_LINE = 20
+
+def write(line, column, text)
+  Curses.setpos(line, column)
+  Curses.addstr(text);
+end
+
+def init_screen
+  Curses.noecho # do not show typed keys
+  Curses.init_screen
+  Curses.stdscr.keypad(true) # enable arrow keys
+  begin
+    yield
+  ensure
+    Curses.close_screen
+  end
+end
+
+def display(game)
+  write 0,0, game.board
+  #if winner = game.winner
+  #  write(STATUS_LINE, 0, "Player #{winner} has won!!!!")
+  #elsif game.draw?
+  #  write(STATUS_LINE, 0, "It is a draw...")
+  #else
+  #  write(STATUS_LINE, 0, "It is #{game.player}`s turn...")
+  #end
+end
+
+init_screen do
+  seed = [[1,1],[1,2],[1,3]]
+  write(STATUS_LINE+1, 0, "q=Quit r=Reset a=AI-move")
+
+  game = Life.new(seed)
+
+  loop do
+    display game
+
+    case Curses.getch
+    when 10 then game.iterate # enter
+    when ?q then break
+    when ?r then game = Life.new(seed)
+    end
+  end
+end
