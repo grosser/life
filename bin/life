@@ -22,18 +22,11 @@ end
 
 def display(game)
   write 0,0, game.board
-  #if winner = game.winner
-  #  write(STATUS_LINE, 0, "Player #{winner} has won!!!!")
-  #elsif game.draw?
-  #  write(STATUS_LINE, 0, "It is a draw...")
-  #else
-  #  write(STATUS_LINE, 0, "It is #{game.player}`s turn...")
-  #end
 end
 
 init_screen do
   seed = ARGV.map{|x|x.split(',').map{|y|y.to_i}}
-  write(STATUS_LINE+1, 0, "q=Quit r=Reset a=AI-move")
+  write(STATUS_LINE+1, 0, "q=Quit r=Reset enter=iterate")
 
   game = Life.new(seed)
 

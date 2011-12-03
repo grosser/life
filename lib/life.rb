@@ -1,5 +1,5 @@
 class Life
-  X = 15
+  BOARD_DIMENSION = 15
 
   def initialize(life)
     @board = new_board
@@ -13,7 +13,7 @@ class Life
   end
 
   def new_board
-    Array.new(X).map{ Array.new(X).fill(' ') }
+    Array.new(BOARD_DIMENSION).map{ Array.new(BOARD_DIMENSION).fill(' ') }
   end
 
   def iterate
