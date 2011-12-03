@@ -3,7 +3,7 @@ Play the game of life using Curses(full-screen-commandline app).
 
 Install
 =======
-    git clone ....
+    git clone https://grosser@github.com/grosser/life.git
     cd life
     bundle && bundle exec ./bin/life 1,1 1,2 1,3
 
